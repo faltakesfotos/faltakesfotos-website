@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 4.7%;
+  --foreground: 40 14% 95%;
+  --card: 0 0% 6%;
+  --card-foreground: 40 14% 95%;
+  --popover: 0 0% 6%;
+  --popover-foreground: 40 14% 95%;
+  --primary: 11 72% 62%;
+  --primary-foreground: 40 14% 95%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 40 14% 95%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 40 10% 60%;
+  --accent: 11 72% 62%;
+  --accent-foreground: 40 14% 95%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 11 72% 62%;
+  --radius: 0rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Typography */
+.font-display {
+  font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
+}
+
+/* Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Vignette */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(0,0,0,0.4) 100%);
+}
+
+/* Hero Animation */
+@keyframes heroZoom {
+  from {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hero-image-animate {
+  animation: heroZoom 1.2s ease-out forwards;
+}
+
+/* Button Hover Effects */
+.btn-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Card Hover */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Image Hover */
+.image-hover {
+  transition: transform 0.5s ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Line Animation */
+.line-reveal {
+  transform-origin: left;
+  animation: lineReveal 0.8s ease-out forwards;
+}
+
+@keyframes lineReveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Fade In Up */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger Children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.stagger-children.animate > * {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.stagger-children.animate > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children.animate > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children.animate > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children.animate > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children.animate > *:nth-child(5) { animation-delay: 0.5s; }
+
+/* Package Card Selected */
+.package-selected {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3);
+}
+
+/* Calendar Styles */
+.calendar-day {
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover:not(.disabled) {
+  background: hsl(var(--primary) / 0.2);
+}
+
+.calendar-day.selected {
+  background: hsl(var(--primary));
+  color: white;
+}
+
+.calendar-day.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Quote Builder */
+.quote-total {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+/* Section Transitions */
+.section-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Light Section */
+.light-section {
+  background: #F4F2EE;
+  color: #0B0C0F;
+}
+
+.light-section .text-secondary {
+  color: rgba(11, 12, 15, 0.68);
+}
+
+/* Hairline */
+.hairline {
+  height: 1px;
+  background: rgba(244, 242, 238, 0.2);
+}
+
+.light-section .hairline {
+  background: rgba(11, 12, 15, 0.15);
+}
+
+/* Focus States */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
